@@ -1,4 +1,5 @@
 import { Menu } from "./core/menu";
+import { Module } from "./core/module";
 
 export class ContextMenu extends Menu {
   constructor(selector) {
@@ -7,7 +8,7 @@ export class ContextMenu extends Menu {
       event.preventDefault();
       this.el.style.left = event.clientX + "px";
       this.el.style.top = event.clientY + "px";
-      this.open();     
+      this.open();
     });
   }
 
@@ -15,23 +16,21 @@ export class ContextMenu extends Menu {
     this.el.style.display = "block";
     console.log("Ура");
   }
-  close() {    
+  close() {
     this.el.style.display = "none";
   }
 
   add(module) {
-    if (! ( module instanceof Module)) {
-      console.error('Cannot add not a Module instance to the context menu');
+    if (!(module instanceof Module)) {
+      console.error("Cannot add not a Module instance to the context menu");
       return;
     }
-    const thisItem = document.createElement('li');
-    thisItem.className = '.menu-item';
-    thisItem.textContent = module.name;
-    thisItem.dataset.type = module.type;
-    thisItem.addEventListener('click', ()=>{
+    this.el.innerHTML = module.toHTML();
+    const thisItem = document.querySelector(".menu-item");
+    thisItem.addEventListener("click", () => {
       module.trigger();
-      this.close()
-    })
-    this.el.append(thisItem)
+      this.close();
+    });
+
   }
 }
