@@ -25,8 +25,9 @@ export class ContextMenu extends Menu {
       console.error("Cannot add not a Module instance to the context menu");
       return;
     }
-    this.el.innerHTML = module.toHTML();
-    const thisItem = document.querySelector(".menu-item");
+    // this.el.innerHTML += module.toHTML();
+    this.el.insertAdjacentHTML("beforeEnd",module.toHTML() )
+    const thisItem = document.querySelector(`[data-type=${module.type}]`);    
     thisItem.addEventListener("click", () => {
       module.trigger();
       this.close();
