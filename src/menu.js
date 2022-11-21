@@ -38,8 +38,6 @@ export class ContextMenu extends Menu {
       module.trigger();
       this.close();
     });
-    thisItem.addEventListener('mouseout',()=> {
-      this.close();
-    })
+   
   }
 }
