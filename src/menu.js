@@ -6,7 +6,8 @@ export class ContextMenu extends Menu {
     super(selector);
     document.body.addEventListener("contextmenu", (event) => {
       event.preventDefault();
-      
+      const message = document.querySelector('header');
+      message.style.display = "none";
       this.el.style.left = event.clientX+ "px";
       if ((window.screen.width-event.clientX)<this.el.clientWidth) {
         this.el.style.left = (event.clientX-this.el.clientWidth)+ "px";
